@@ -61,11 +61,13 @@ button {
 #displayList li {
   padding: 8px 12px;
   border-bottom: 1px solid #eee;
+  cursor: pointer;
 }
 
 #displayList li.selected {
   background-color: #007BFF;
   color: white;
+  font-weight: bold;
 }
 
 .line.selected {

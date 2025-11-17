@@ -1,7 +1,6 @@
-import { processLines } from './main.js'; // Din befintliga main.js-modul
+import { processLines } from './main.js';
 
 const inputText = document.getElementById('inputText');
-
 const processBtn = document.getElementById('processBtn');
 const displayList = document.getElementById('displayList');
 const copyBtn = document.getElementById('copyBtn');
@@ -11,23 +10,24 @@ let currentIndex = 0;
 
 // Bearbeta text när användaren klickar på knappen
 processBtn.addEventListener('click', () => {
-  const lines = inputText.value.split('\n');
-  displayArray = processLines(lines); // Använd din main.js logik
+  const lines = inputText.value.split('\n')
+    .map(line => line.trim())           // ta bort whitespace
+    .filter(line => line.length > 0);   // ignorera tomma rader
+
+  displayArray = processLines(lines);
   currentIndex = 0;
   renderList();
 });
 
-// Rendera listan med rader
-// Rendera listan med rader
+// Rendera listan med markerad rad
 function renderList() {
   displayList.innerHTML = '';
   displayArray.forEach((line, index) => {
     const li = document.createElement('li');
-    li.textContent = line.substring(0, 100); // Max 100 tecken
-    li.classList.add('line'); // För CSS
+    li.textContent = line.length > 125 ? line.substring(0, 125) + '…' : line;
+    li.classList.add('line');
     if(index === currentIndex) li.classList.add('selected');
 
-    // Klickhändelse för att markera raden
     li.addEventListener('click', () => {
       currentIndex = index;
       renderList();
@@ -36,13 +36,11 @@ function renderList() {
     displayList.appendChild(li);
   });
 
-  // Scrolla så att aktuell rad är synlig
   const selectedLi = displayList.querySelector('.selected');
   if (selectedLi) {
     selectedLi.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 }
-
 
 // Navigering med tangentbord
 document.addEventListener('keydown', (e) => {
@@ -58,6 +56,7 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   } else if(e.key === 'c' && e.ctrlKey) {
     copyCurrentLine();
+    e.preventDefault();
   }
 });
 
@@ -67,7 +66,7 @@ function copyCurrentLine() {
 
   const text = displayArray[currentIndex];
   navigator.clipboard.writeText(text).then(() => {
-    // Flytta automatiskt till nästa rad
+    console.log(`Kopierad: ${text}`); // feedback
     currentIndex = Math.min(currentIndex + 1, displayArray.length - 1);
     renderList();
   });
