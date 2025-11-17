@@ -2,7 +2,6 @@ import { processLines } from './main.js'; // Din befintliga main.js-modul
 
 const inputText = document.getElementById('inputText');
 
-
 const processBtn = document.getElementById('processBtn');
 const displayList = document.getElementById('displayList');
 const copyBtn = document.getElementById('copyBtn');
@@ -19,12 +18,21 @@ processBtn.addEventListener('click', () => {
 });
 
 // Rendera listan med rader
+// Rendera listan med rader
 function renderList() {
   displayList.innerHTML = '';
   displayArray.forEach((line, index) => {
     const li = document.createElement('li');
     li.textContent = line.substring(0, 100); // Max 100 tecken
+    li.classList.add('line'); // För CSS
     if(index === currentIndex) li.classList.add('selected');
+
+    // Klickhändelse för att markera raden
+    li.addEventListener('click', () => {
+      currentIndex = index;
+      renderList();
+    });
+
     displayList.appendChild(li);
   });
 
@@ -34,6 +42,7 @@ function renderList() {
     selectedLi.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 }
+
 
 // Navigering med tangentbord
 document.addEventListener('keydown', (e) => {

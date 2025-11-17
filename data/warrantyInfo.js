@@ -1,7 +1,7 @@
 export default [
     {
         id: 0,
-        text: " -`ღ´- Viktigt för garanti -"
+        text: " ( ! ) Viktigt för garanti -"
       
     },
     {

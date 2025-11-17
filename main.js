@@ -16,6 +16,9 @@ let twoForOne = false;
 let seperators = 0; 
 let sepCount = -1;
 let displayArray = [];
+let descriptions = ["Upphängningsskena","Ben och socklar","Täcksidor", "Knoppa, handtag och dörrdämpare","Bänkskiva","Väggplatta","Belysningstillbehör"]
+
+
 
 function isCombination(line) { return /^\d{1,2}\. */.test(line); }
 function isArticleNumber(line) { return /^\d{3}\.\d{3}\.\d{2}/.test(line); }
