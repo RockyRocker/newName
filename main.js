@@ -320,7 +320,7 @@ export function processLines(lines) {
         {
           displayArray.push(element.warrenty)
         }
-        if(element.number === "3") alert(JSON.stringify(element, null, 2))
+        //if(element.number === "3") alert(JSON.stringify(element, null, 2))
 
   });
 

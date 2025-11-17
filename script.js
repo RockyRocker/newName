@@ -1,10 +1,3 @@
-// Fördefinierad returarray
-let lines = [
-    "1. Högskåp 60 cm för kyl/frys",
-    "5. Bänkskåp 40 cm med lådor, dolda innerlådor",
-    "13. Överskåp 60 cm med hyllplan och dörr",
-    "18. Väggskåp 60 cm för fläkt"
-];
 
 let currentIndex = 0;
 const output = document.getElementById("output");
